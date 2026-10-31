@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Gem Parade – Impressum / Legal notice</title>
+    <link rel="icon" type="image/png" href="assets/renders/diamond_cyan.png">
+    <!-- Impressum (Anbieterkennzeichnung nach § 5 DDG) fuer App, Store-Eintrag und Webseite, Deutsch und Englisch auf einer Seite.
+         Liegt mit in der App (Einstellungen -> Impressum, auch offline erreichbar). Die oeffentliche Kopie liegt im Repo
+         olderbudweiser0815.github.io; Aenderungen in beiden Fassungen machen. -->
+    <style>
+        :root { --ink: #4a1f8a; --text: #3d2a5c; --bg: #f4efff; --card: #ffffff; --line: rgba(106, 42, 143, 0.16); --accent: #7f4dff; }
+        @media (prefers-color-scheme: dark) {
+            :root { --ink: #d9ccff; --text: #d7d2ee; --bg: #0b0d2e; --card: #171a45; --line: rgba(200, 190, 255, 0.18); --accent: #a98bff; }
+        }
+        * { box-sizing: border-box; }
+        body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+        main { max-width: 760px; margin: 0 auto; padding: 20px 16px 48px; }
+        header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+        h1 { color: var(--ink); font-size: 26px; margin: 8px 0; }
+        h2 { color: var(--ink); font-size: 19px; margin: 28px 0 6px; }
+        section.lang { background: var(--card); border-radius: 18px; padding: 4px 20px 20px; box-shadow: 0 0 0 1px var(--line); }
+        section.lang + section.lang { margin-top: 28px; }
+        a { color: var(--accent); }
+        .switch a { display: inline-block; padding: 6px 12px; border-radius: 999px; box-shadow: 0 0 0 1px var(--line); text-decoration: none; margin-left: 4px; }
+        .back { display: inline-block; margin: 6px 0 14px; font-weight: 700; }
+        .todo { background: #fff3b0; color: #5a4300; padding: 0 4px; border-radius: 4px; }
+        small { opacity: 0.8; }
+        ul { padding-left: 20px; }
+    </style>
+</head>
+<body>
+<main>
+    <header>
+        <h1>Gem Parade</h1>
+        <nav class="switch"><a href="#de">Deutsch</a><a href="#en">English</a></nav>
+    </header>
+    <a class="back" id="back" href="index.html" hidden>← Zurück zum Spiel / Back to the game</a>
+
+    <section class="lang" id="de" lang="de">
+        <h1>Impressum</h1>
+        <h2>Angaben gemäß § 5 DDG</h2>
+        <p>Daniel Raewel<br>In der Ebene 2<br>97218 Gerbrunn<br>Deutschland</p>
+
+        <h2>Kontakt</h2>
+        <p>E-Mail: <a href="mailto:gemparade.app@gmail.com">gemparade.app@gmail.com</a><br>
+            Kontaktformular: <a href="https://forms.gle/yEC9Dfe2dsduvsg27">forms.gle/yEC9Dfe2dsduvsg27</a></p>
+
+        <h2>Datenschutz</h2>
+        <p>Wie das Spiel mit deinen Daten umgeht, steht in der <a class="privacy-link" href="/">Datenschutzerklärung</a>.</p>
+    </section>
+
+    <section class="lang" id="en" lang="en">
+        <h1>Legal notice</h1>
+        <h2>Information according to § 5 DDG (German Digital Services Act)</h2>
+        <p>Daniel Raewel<br>In der Ebene 2<br>97218 Gerbrunn<br>Germany</p>
+
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:gemparade.app@gmail.com">gemparade.app@gmail.com</a><br>
+            Contact form: <a href="https://forms.gle/yEC9Dfe2dsduvsg27">forms.gle/yEC9Dfe2dsduvsg27</a></p>
+
+        <h2>Privacy</h2>
+        <p>How the game handles your data is described in the <a class="privacy-link" href="/#en">privacy policy</a>.</p>
+    </section>
+</main>
+<script>
+    // In der App (Einstellungen -> Impressum, ?app): Link zurueck ins Spiel zeigen und ?app an den Datenschutz-Link weitergeben;
+    // Englisch zuerst, wenn das Geraet kein Deutsch spricht
+    var q = new URLSearchParams(location.search);
+    if (q.has('app')) {
+        document.getElementById('back').hidden = false;
+        document.querySelectorAll('.privacy-link').forEach(function (a) {
+            var parts = a.getAttribute('href').split('#');
+            a.setAttribute('href', parts[0] + '?' + q.toString() + (parts[1] ? '#' + parts[1] : ''));
+        });
+    }
+    var lang = (q.get('lang') || navigator.language || 'de').slice(0, 2).toLowerCase();
+    if (lang !== 'de' && !location.hash) location.hash = '#en';
+</script>
+</body>
+</html>
